@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+    <title>Our Forever | A Special Question</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "surface-container-lowest": "#ffffff",
+                "on-surface": "#2f3334",
+                "primary": "#ac2d5e",
+                "primary-container": "#fd6c9c",
+                "secondary": "#6c5a61",
+                "secondary-container": "#f4dce4",
+                "on-primary": "#fff7f7",
+                "surface-container-low": "#f2f4f4",
+                "outline-variant": "#aeb3b3",
+                "outline": "#777b7c",
+              },
+              fontFamily: {
+                "headline": ["Noto Serif"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+              },
+            },
+          },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .bg-petal-gradient {
+            background: linear-gradient(135deg, #fff7f7 0%, #fef0f0 50%, #f4dce4 100%);
+        }
+        
+        /* Animasi Bunga Jatuh Background */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+        .floating-petal {
+            position: fixed;
+            animation: fall linear forwards;
+            color: #fd6c9c;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* Animasi Bunga Melayang */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(172, 45, 94, 0.08);
+        }
+
+        /* Animasi Exploding Heart */
+        @keyframes explode {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(var(--scale));
+                opacity: 0;
+            }
+        }
+        .heart-particle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: explode 1.5s ease-out forwards;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+
+<body class="bg-petal-gradient font-body text-on-surface overflow-hidden min-h-screen relative touch-none overscroll-none">
+    
+    <header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 bg-transparent pointer-events-none">
+        <div class="text-2xl font-serif italic text-rose-800 pointer-events-auto">Our Forever</div>
+        <div class="flex gap-4 pointer-events-auto">
+            <span class="material-symbols-outlined text-rose-800 hover:scale-110 transition-transform duration-500 cursor-pointer" data-icon="music_note">music_note</span>
+            <span class="material-symbols-outlined text-rose-800 hover:scale-110 transition-transform duration-500 cursor-pointer" data-icon="volume_up">volume_up</span>
+        </div>
+    </header>
+
+    <div class="fixed inset-0 pointer-events-none opacity-40 z-0">
+        <div class="absolute top-10 left-[10%] rotate-45 scale-75">
+            <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">spa</span>
+        </div>
+        <div class="absolute bottom-1/4 left-[5%] rotate-90 scale-110">
+            <span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">spa</span>
+        </div>
+        <div class="absolute bottom-10 right-[20%] rotate-[160deg]">
+            <span class="material-symbols-outlined text-secondary-container" style="font-variation-settings: 'FILL' 1;">spa</span>
+        </div>
+    </div>
+    
+    <div class="fixed top-0 right-0 p-4 pointer-events-none opacity-20 z-0">
+        <span class="material-symbols-outlined text-9xl text-primary" data-icon="filter_vintage">filter_vintage</span>
+    </div>
+    <div class="fixed bottom-0 left-0 p-4 pointer-events-none opacity-20 rotate-180 z-0">
+        <span class="material-symbols-outlined text-9xl text-primary" data-icon="filter_vintage">filter_vintage</span>
+    </div>
+
+    <main id="slider-container" class="flex w-[300vw] h-screen transition-transform duration-1000 ease-in-out">
+        
+        <section class="w-[100vw] h-screen flex items-center justify-center relative z-10 px-4">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-primary opacity-10 blur-[80px] rounded-full group-hover:opacity-20 transition-opacity duration-700"></div>
+                <div class="glass-card relative p-12 md:p-20 rounded-xl md:rounded-[4rem] flex flex-col items-center text-center max-w-xl">
+                    <div class="space-y-4 mb-10">
+                        <span class="material-symbols-outlined text-primary text-5xl float-animation" style="font-variation-settings: 'FILL' 1;">mail</span>
+                        <h1 class="font-headline text-3xl md:text-5xl italic text-primary font-bold leading-tight mt-4">Aku mau ngomong serius sama kamu...</h1>
+                    </div>
+                    <button onclick="nextSlide(1)" class="px-10 py-3 bg-primary text-on-primary font-label text-lg font-bold rounded-full shadow-[0_10px_25px_rgba(172,45,94,0.3)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2">
+                        <span>Lanjut</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-[100vw] h-screen flex items-center justify-center relative z-10 px-4">
+            <div class="relative group">
+                <div class="absolute inset-0 bg-primary opacity-10 blur-[80px] rounded-full group-hover:opacity-20 transition-opacity duration-700"></div>
+                <div class="glass-card relative p-12 md:p-20 rounded-xl md:rounded-[4rem] flex flex-col items-center text-center max-w-2xl">
+                    <div class="space-y-4 mb-10">
+                        <span class="font-label text-secondary tracking-[0.3em] text-xs uppercase block">A Question From My Heart</span>
+                        <h1 class="font-headline text-4xl md:text-6xl italic text-primary font-bold leading-tight">Can I Be Ur Boyfriend?</h1>
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center gap-8 w-full justify-center">
+                        <button onclick="nextSlide(2)" class="px-12 py-4 bg-primary text-on-primary font-label text-lg font-bold rounded-full shadow-[0_10px_25px_rgba(172,45,94,0.3)] hover:scale-110 active:scale-95 transition-all duration-500 flex items-center gap-2 group/btn relative overflow-hidden">
+                            <span class="relative z-10">Ya!</span>
+                            <span class="material-symbols-outlined relative z-10 group-hover/btn:animate-pulse" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                        </button>
+                        <button id="noBtn" class="px-8 py-3 bg-transparent text-secondary font-label text-sm font-medium rounded-full hover:text-on-surface hover:bg-surface-container-low transition-all duration-300 opacity-60 hover:opacity-100 border border-transparent hover:border-outline-variant/20 relative">
+                            Enggak
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="absolute top-20 right-40 opacity-20 float-animation pointer-events-none">
+                <span class="material-symbols-outlined text-primary-container text-6xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+            <div class="absolute bottom-20 left-40 opacity-10 -rotate-12 float-animation pointer-events-none">
+                <span class="material-symbols-outlined text-primary text-9xl" style="font-variation-settings: 'FILL' 1;">favorite</span>
+            </div>
+        </section>
+
+        <section class="w-[100vw] h-screen flex items-center justify-center relative z-10 px-4" id="slide3">
+            <div id="explosion-container" class="absolute inset-0 pointer-events-none z-0"></div> <div class="relative group z-10">
+                <div class="absolute inset-0 bg-primary opacity-10 blur-[80px] rounded-full group-hover:opacity-20 transition-opacity duration-700"></div>
+                <div class="glass-card relative p-12 md:p-20 rounded-xl md:rounded-[4rem] flex flex-col items-center text-center max-w-xl">
+                    <div class="space-y-4">
+                        <span class="material-symbols-outlined text-primary text-7xl float-animation" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+                        <h1 class="font-headline text-4xl md:text-6xl italic text-primary font-bold leading-tight mt-6">Makasih yaaa ❤️</h1>
+                        <p class="font-body text-secondary mt-4">Tunggu tanggal mainnya ya!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="fixed bottom-0 w-full flex flex-col items-center justify-center py-6 gap-4 bg-transparent pointer-events-none z-50">
+        <div class="text-[10px] uppercase tracking-widest text-outline">Designed by Davictor </div>
+    </footer>
+
+    <script>
+        // Logika Slider
+        function nextSlide(slideIndex) {
+            const slider = document.getElementById('slider-container');
+            // Geser layar sebesar -100vw untuk setiap slide
+            slider.style.transform = `translateX(-${slideIndex * 100}vw)`;
+            
+            // Sembunyikan tombol "Enggak" jika bergeser ke slide 3 agar tidak nyangkut di layar
+            if (slideIndex === 2) {
+                document.getElementById('noBtn').style.display = 'none';
+                // Trigger ledakan hati setelah animasi slide selesai (kira-kira 800ms)
+                setTimeout(createExplosion, 800);
+            }
+        }
+
+        
+        // Logika Tombol "Enggak" Menghindar (Support Mobile & Desktop)
+        document.addEventListener("DOMContentLoaded", () => {
+        const noBtn = document.getElementById("noBtn");
+
+        function moveButton() {
+        // Ambil ukuran layar saat ini
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        // Ambil ukuran tombol
+        const btnRect = noBtn.getBoundingClientRect();
+        
+        // Tentukan area lari (semakin besar semakin jauh)
+        const range = 150; 
+        const offsetX = (Math.random() - 0.5) * range;
+        const offsetY = (Math.random() - 0.5) * range;
+
+        let newX = btnRect.left + offsetX;
+        let newY = btnRect.top + offsetY;
+
+        // Batasi pergerakan agar tidak keluar layar (dengan padding 20px agar aman di HP)
+        newX = Math.max(20, Math.min(windowWidth - btnRect.width - 20, newX));
+        newY = Math.max(20, Math.min(windowHeight - btnRect.height - 20, newY));
+
+        // Ubah posisi menjadi fixed agar selalu patuh pada layar HP, bukan pada slider
+        noBtn.style.position = "fixed";
+        noBtn.style.left = newX + "px";
+        noBtn.style.top = newY + "px";
+        noBtn.style.transition = "all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1)"; // Transisi lebih smooth
+        noBtn.style.zIndex = "9999";
+        }
+
+        // [DESKTOP] Menghindar saat kursor mendekat
+        document.addEventListener("mousemove", (e) => {
+        if(noBtn.style.display !== 'none') {
+            const rect = noBtn.getBoundingClientRect();
+            // Hitung jarak kursor ke tengah tombol
+            const distanceX = Math.abs(e.clientX - (rect.left + rect.width / 2));
+            const distanceY = Math.abs(e.clientY - (rect.top + rect.height / 2));
+
+            // Jika kursor masuk radius bahaya, pindahkan!
+            if (distanceX < 90 && distanceY < 60) {
+                moveButton();
+            }
+        }
+    });
+
+    // [MOBILE] Menghindar sesaat sebelum jarinya berhasil menekan (menyentuh)
+    noBtn.addEventListener("touchstart", (e) => {
+        if(noBtn.style.display !== 'none') {
+            e.preventDefault(); // Mencegah klik tidak sengaja saat disentuh
+            moveButton();
+        }
+    }, { passive: false });
+});
+
+        // Logika Hati Jatuh di Background
+        function createFallingHeart() {
+            const heart = document.createElement("span");
+            heart.className = "material-symbols-outlined floating-petal";
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = "-20px";
+            heart.style.fontSize = Math.random() * 20 + 20 + "px";
+            heart.style.opacity = Math.random();
+            heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+            heart.innerText = "favorite";
+            
+            // Hanya isi (FILL) secara acak agar bervariasi
+            heart.style.fontVariationSettings = `'FILL' ${Math.round(Math.random())}`;
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 7000);
+        }
+        setInterval(createFallingHeart, 400);
+
+        // Logika Ledakan Hati (Exploding Heart)
+        function createExplosion() {
+            const container = document.getElementById('explosion-container');
+            const numParticles = 40; // Jumlah hati yang meledak
+            const colors = ['#ac2d5e', '#fd6c9c', '#f97386', '#e6ced6'];
+
+            for (let i = 0; i < numParticles; i++) {
+                const heart = document.createElement("span");
+                heart.className = "material-symbols-outlined heart-particle";
+                heart.innerText = "favorite";
+                heart.style.fontVariationSettings = "'FILL' 1";
+                
+                // Randomize warna dari array colors
+                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Kalkulasi arah ledakan menyebar (melingkar)
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = 100 + Math.random() * 400; // Jarak tembak
+                const tx = Math.cos(angle) * velocity + 'px';
+                const ty = Math.sin(angle) * velocity + 'px';
+                const scale = Math.random() * 1.5 + 0.5;
+
+                // Memasukkan variabel ke CSS Custom Properties
+                heart.style.setProperty('--tx', tx);
+                heart.style.setProperty('--ty', ty);
+                heart.style.setProperty('--scale', scale);
+                
+                heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+
+                container.appendChild(heart);
+
+                // Hapus elemen setelah animasi selesai (1.5 detik)
+                setTimeout(() => {
+                    heart.remove();
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>
